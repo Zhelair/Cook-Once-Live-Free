@@ -1,0 +1,268 @@
+{
+  "recipes": [
+    {
+      "id": "bg_oven_chicken_tray",
+      "type": "base",
+      "name": "Oven chicken tray with onions & paprika",
+      "blurb": "One tray. Big flavor. Reheats like a champ.",
+      "ingredients": [
+        "chicken thighs",
+        "onion",
+        "garlic",
+        "paprika",
+        "salt",
+        "black pepper",
+        "oil"
+      ],
+      "shopping": [
+        "1.2 kg chicken thighs",
+        "4 onion",
+        "1 garlic",
+        "1 paprika spice",
+        "1 oil"
+      ],
+      "tags": [
+        "batch",
+        "minimal",
+        "high_protein",
+        "normal"
+      ],
+      "allergens": [],
+      "rare_in": [],
+      "remix": [
+        "Serve with rice + cucumber salad",
+        "Wrap in bread with yogurt sauce (skip if dairy)",
+        "Add to pasta with a spoon of tomato sauce"
+      ]
+    },
+    {
+      "id": "bg_goulash_stew",
+      "type": "base",
+      "name": "Simple goulash-style stew",
+      "blurb": "One pot. Cozy. Perfect with rice, pasta, or potatoes.",
+      "ingredients": [
+        "pork shoulder OR beef",
+        "onion",
+        "carrot",
+        "tomato paste",
+        "paprika",
+        "salt",
+        "pepper",
+        "water"
+      ],
+      "shopping": [
+        "1.3 kg pork shoulder OR beef",
+        "3 onion",
+        "3 carrot",
+        "1 tomato paste",
+        "1 paprika spice"
+      ],
+      "tags": [
+        "batch",
+        "normal",
+        "inspired"
+      ],
+      "allergens": [],
+      "rare_in": [],
+      "remix": [
+        "Over pasta with grated cheese (skip if dairy)",
+        "Turn into soup by adding water + potatoes",
+        "Serve in bread as a 'stew sandwich'"
+      ]
+    },
+    {
+      "id": "veg_lentil_pot",
+      "type": "base",
+      "name": "Lentil & veggie one-pot",
+      "blurb": "Cheap, filling, and surprisingly good on day 4.",
+      "ingredients": [
+        "lentils",
+        "onion",
+        "carrot",
+        "tomato",
+        "garlic",
+        "salt",
+        "pepper"
+      ],
+      "shopping": [
+        "500 lentils (g)",
+        "2 onion",
+        "2 carrot",
+        "2 tomato",
+        "1 garlic"
+      ],
+      "tags": [
+        "batch",
+        "minimal",
+        "light",
+        "gentle",
+        "normal"
+      ],
+      "allergens": [],
+      "rare_in": [],
+      "remix": [
+        "Add fried onion on top",
+        "Stuff into a wrap with salad",
+        "Serve over rice for extra calories"
+      ]
+    },
+    {
+      "id": "tofu_sesame_bake",
+      "type": "base",
+      "name": "Baked tofu with ginger-garlic glaze",
+      "blurb": "Vegan-friendly, protein-ish, and very meal-prepable.",
+      "ingredients": [
+        "tofu",
+        "garlic",
+        "ginger",
+        "soy sauce",
+        "oil",
+        "black pepper"
+      ],
+      "shopping": [
+        "600 tofu (g)",
+        "1 garlic",
+        "1 ginger",
+        "1 soy sauce",
+        "1 oil"
+      ],
+      "tags": [
+        "batch",
+        "inspired",
+        "light",
+        "normal"
+      ],
+      "allergens": [
+        "gluten"
+      ],
+      "rare_in": [],
+      "remix": [
+        "Serve with rice + cucumber",
+        "Toss into noodles (if not gluten-free)",
+        "Add chili flakes for adventure mode"
+      ]
+    },
+    {
+      "id": "side_roasted_veg",
+      "type": "side",
+      "name": "Roasted vegetables (tray)",
+      "blurb": "Use whatever you have. The oven does the job.",
+      "ingredients": [
+        "potatoes",
+        "carrot",
+        "pepper",
+        "onion",
+        "oil",
+        "salt"
+      ],
+      "shopping": [
+        "1.5 potatoes (kg)",
+        "4 carrot",
+        "2 pepper",
+        "1 oil"
+      ],
+      "tags": [
+        "batch",
+        "minimal",
+        "light",
+        "normal"
+      ],
+      "allergens": [],
+      "rare_in": []
+    },
+    {
+      "id": "side_salad_base",
+      "type": "side",
+      "name": "Salad base (chop once)",
+      "blurb": "Cucumber + tomato + herbs. Keep dressing separate.",
+      "ingredients": [
+        "cucumber",
+        "tomato",
+        "parsley",
+        "salt",
+        "oil"
+      ],
+      "shopping": [
+        "4 cucumber",
+        "4 tomato",
+        "1 parsley"
+      ],
+      "tags": [
+        "batch",
+        "minimal",
+        "light"
+      ],
+      "allergens": [],
+      "rare_in": []
+    },
+    {
+      "id": "carb_rice",
+      "type": "carb",
+      "name": "Rice (10–12 min)",
+      "ingredients": [
+        "rice"
+      ],
+      "shopping": [
+        "1 rice (kg)"
+      ],
+      "tags": [
+        "minimal",
+        "batch"
+      ],
+      "allergens": [],
+      "rare_in": []
+    },
+    {
+      "id": "carb_pasta",
+      "type": "carb",
+      "name": "Pasta (8–10 min)",
+      "ingredients": [
+        "pasta"
+      ],
+      "shopping": [
+        "1 pasta (kg)"
+      ],
+      "tags": [
+        "minimal"
+      ],
+      "allergens": [
+        "gluten"
+      ],
+      "rare_in": []
+    },
+    {
+      "id": "carb_potatoes",
+      "type": "carb",
+      "name": "Boiled potatoes (15 min)",
+      "ingredients": [
+        "potatoes"
+      ],
+      "shopping": [
+        "1 potatoes (kg)"
+      ],
+      "tags": [
+        "minimal"
+      ],
+      "allergens": [],
+      "rare_in": []
+    },
+    {
+      "id": "carb_bread",
+      "type": "carb",
+      "name": "Bread / wraps",
+      "ingredients": [
+        "bread"
+      ],
+      "shopping": [
+        "2 bread"
+      ],
+      "tags": [
+        "minimal"
+      ],
+      "allergens": [
+        "gluten"
+      ],
+      "rare_in": []
+    }
+  ]
+}

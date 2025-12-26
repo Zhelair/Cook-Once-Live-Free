@@ -1,0 +1,166 @@
+{
+  "diets": [
+    {
+      "id": "omnivore",
+      "label": "🥩 Omnivore",
+      "exclude_keywords": []
+    },
+    {
+      "id": "no_pork",
+      "label": "🐔 No pork",
+      "exclude_keywords": [
+        "pork",
+        "bacon",
+        "ham",
+        "sausage"
+      ]
+    },
+    {
+      "id": "no_beef",
+      "label": "🐮 No beef",
+      "exclude_keywords": [
+        "beef",
+        "veal"
+      ]
+    },
+    {
+      "id": "pescatarian",
+      "label": "🐟 Pescatarian (fish ok)",
+      "exclude_keywords": [
+        "chicken",
+        "pork",
+        "beef",
+        "turkey",
+        "lamb",
+        "minced meat"
+      ]
+    },
+    {
+      "id": "vegetarian",
+      "label": "🌱 Vegetarian",
+      "exclude_keywords": [
+        "chicken",
+        "pork",
+        "beef",
+        "turkey",
+        "lamb",
+        "fish",
+        "tuna",
+        "salmon",
+        "anchovy",
+        "minced meat",
+        "gelatin"
+      ]
+    },
+    {
+      "id": "vegan",
+      "label": "🌿 Vegan",
+      "exclude_keywords": [
+        "chicken",
+        "pork",
+        "beef",
+        "turkey",
+        "lamb",
+        "fish",
+        "tuna",
+        "salmon",
+        "anchovy",
+        "minced meat",
+        "milk",
+        "cheese",
+        "yogurt",
+        "butter",
+        "egg",
+        "honey",
+        "gelatin"
+      ]
+    },
+    {
+      "id": "halal_style",
+      "label": "☪️ Halal-style (no pork, no alcohol)",
+      "exclude_keywords": [
+        "pork",
+        "bacon",
+        "ham",
+        "wine",
+        "beer",
+        "vodka",
+        "rum",
+        "whiskey"
+      ]
+    },
+    {
+      "id": "kosher_style",
+      "label": "✡️ Kosher-style (no pork/shellfish; no mixing meat+dairy)",
+      "exclude_keywords": [
+        "pork",
+        "bacon",
+        "ham",
+        "shrimp",
+        "prawn",
+        "shellfish",
+        "crab",
+        "lobster",
+        "cheese sauce on chicken",
+        "cream on chicken",
+        "milk on meat"
+      ]
+    }
+  ],
+  "allergies": [
+    {
+      "id": "nuts",
+      "label": "🥜 Nuts",
+      "keywords": [
+        "almond",
+        "walnut",
+        "cashew",
+        "hazelnut",
+        "peanut"
+      ]
+    },
+    {
+      "id": "dairy",
+      "label": "🥛 Dairy",
+      "keywords": [
+        "milk",
+        "cheese",
+        "yogurt",
+        "cream",
+        "butter"
+      ]
+    },
+    {
+      "id": "eggs",
+      "label": "🥚 Eggs",
+      "keywords": [
+        "egg",
+        "eggs"
+      ]
+    },
+    {
+      "id": "gluten",
+      "label": "🌾 Gluten",
+      "keywords": [
+        "wheat",
+        "flour",
+        "bread",
+        "pasta",
+        "noodles",
+        "breadcrumbs",
+        "soy sauce"
+      ]
+    },
+    {
+      "id": "shellfish",
+      "label": "🦐 Shellfish",
+      "keywords": [
+        "shrimp",
+        "prawn",
+        "crab",
+        "lobster",
+        "shellfish"
+      ]
+    }
+  ]
+}

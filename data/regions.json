@@ -1,0 +1,59 @@
+{
+  "regions": [
+    {
+      "id": "bg",
+      "label": "Bulgaria 🇧🇬",
+      "common_proteins": [
+        "chicken",
+        "pork",
+        "minced meat",
+        "beans",
+        "eggs",
+        "cheese"
+      ],
+      "common_sides": [
+        "potatoes",
+        "rice",
+        "bread",
+        "salad"
+      ],
+      "notes": "Seafood is less common; pork & chicken are easy wins."
+    },
+    {
+      "id": "de",
+      "label": "Germany 🇩🇪",
+      "common_proteins": [
+        "pork",
+        "chicken",
+        "beef",
+        "lentils",
+        "tofu"
+      ],
+      "common_sides": [
+        "potatoes",
+        "bread",
+        "pasta",
+        "cabbage"
+      ],
+      "notes": "Potatoes and cabbage are basically a lifestyle."
+    },
+    {
+      "id": "us",
+      "label": "USA 🇺🇸",
+      "common_proteins": [
+        "chicken",
+        "beef",
+        "beans",
+        "tofu",
+        "fish"
+      ],
+      "common_sides": [
+        "rice",
+        "pasta",
+        "potatoes",
+        "salad"
+      ],
+      "notes": "Wide ingredient availability; endless variety."
+    }
+  ]
+}
