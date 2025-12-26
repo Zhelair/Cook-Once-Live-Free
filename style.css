@@ -1,0 +1,13 @@
+body{margin:0;font-family:system-ui;background:#0b0d12;color:#e9ecf5}
+.wrap{max-width:900px;margin:auto;padding:20px}
+.card{background:#141824;border-radius:16px;padding:16px;margin:16px 0}
+.card.sub{background:#10131c}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.span2{grid-column:1/-1}
+input,select{padding:10px;border-radius:10px;border:none;background:#0b0d12;color:#fff}
+.segmented{display:flex;gap:8px;flex-wrap:wrap}
+.seg,.btn{padding:10px 14px;border-radius:999px;border:1px solid #333;background:#0b0d12;color:#fff;cursor:pointer}
+.seg.active{background:#1e3a34;border-color:#7cf0d5}
+.btn.primary{background:#1e3a34;border-color:#7cf0d5}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.chip{padding:6px 10px;border-radius:999px;background:#222}
