@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Cook Once, Live Free</title>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <div class="title">
+      <h1>🍳 Cook Once, Live Free</h1>
+      <p>Cook once on Sunday. Eat calmly all week. Real recipes via TheMealDB.</p>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+<section class="card">
+  <h2>Your setup</h2>
+  <p class="muted" style="margin-top:6px">This app turns one Sunday cook into multiple weekday meals — less decisions, fewer dishes.</p>
+
+  <label>Choose your region</label>
+  <div id="regionGrid" class="region-grid"></div>
+  <input type="hidden" id="regionInput" value="balkans"/>
+
+  <label>Effort & cleanup</label>
+  <div class="slider-row">
+    <div class="slider-ends"><span>🥪 Sandwich Mode</span><span>👨‍🍳 Top Chef</span></div>
+    <input id="effortSlider" type="range" min="0" max="3" step="1" value="0"/>
+    <div id="effortLabel" class="slider-label">🥪 Sandwich Mode</div>
+  </div>
+
+  <label class="toggle-row">
+    <span>Sunday batch mode</span>
+    <input id="batchToggle" type="checkbox" checked/>
+  </label>
+  <small>Batch mode prefers oven trays, stews, and “cook once / reheat well” recipes.</small>
+
+  <label>Diet</label>
+  <div class="segmented" id="dietTabs"></div>
+  <input type="hidden" id="dietInput" value="omnivore"/>
+
+  <label>Allergies (optional)</label>
+  <div class="row">
+    <select id="allergySelect"><option value="">None</option></select>
+    <button id="addAllergy" class="btn" type="button">Add</button>
+  </div>
+  <div id="allergyChips" class="chips"></div>
+
+  <label>I already have</label>
+  <div class="pantryBox">
+    <div class="row">
+      <input id="pantryInput" list="ingSuggestions" placeholder="type ingredient + Enter (we auto-fix small typos)"/>
+      <button id="btnClearPantry" class="btn ghost" type="button">Clear</button>
+    </div>
+    <datalist id="ingSuggestions"></datalist>
+    <div id="pantryChips" class="chips"></div>
+    <div id="quickPantry" class="quick"></div>
+    <small>Tip: click a chip to edit/remove. ✍️</small>
+  </div>
+
+  <div class="actions">
+    <button id="btnRecipeMatch" class="btn primary" type="button">Build my week (use my pantry)</button>
+    <button id="btnRecipeRandom" class="btn" type="button">Build my week (random base)</button>
+  </div>
+</section>
+
+<section class="card" id="recipeCard" hidden>
+  <h2>🗓 Your weekly plan</h2>
+  <div id="weeklyPlanBox" class="weekly-plan"></div>
+  <div id="recipeBox"></div>
+  <div class="actions">
+    <button id="btnAnother" class="btn" type="button">🔁 Rebuild week</button>
+    <button id="btnSave" class="btn" type="button">⭐ Save</button>
+    <button id="btnSaved" class="btn ghost" type="button">Open saved</button>
+  </div>
+</section>
+
+<section class="card" id="savedCard" hidden>
+  <h2>Saved recipes</h2>
+  <div id="savedBox"></div>
+  <div class="actions">
+    <button id="btnCloseSaved" class="btn" type="button">Close</button>
+    <button id="btnClearSaved" class="btn danger" type="button">Clear saved</button>
+  </div>
+</section>
+</main>
+
+<div id="toast" class="toast" hidden></div>
+<script src="app.js"></script>
+</body>
+</html>
