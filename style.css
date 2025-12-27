@@ -1,0 +1,166 @@
+/* Minimal, readable, Holiday Harmony-ish vibe */
+:root{
+  --bg:#0b1020;
+  --card:rgba(255,255,255,.06);
+  --stroke:rgba(255,255,255,.10);
+  --text:#e9ecf5;
+  --muted:rgba(233,236,245,.72);
+  --accent:rgba(124,240,213,.85);
+}
+*{box-sizing:border-box}
+body{
+  margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  background: radial-gradient(1200px 600px at 10% 0%, rgba(124,240,213,.12), transparent 60%),
+              radial-gradient(900px 500px at 90% 10%, rgba(160,140,255,.12), transparent 60%),
+              var(--bg);
+  color:var(--text);
+}
+.top{
+  padding:18px 18px 8px;
+  display:flex; gap:14px; align-items:center; justify-content:space-between;
+  max-width:1100px; margin:0 auto;
+}
+.brand{display:flex; gap:12px; align-items:center}
+.logo{width:46px; height:46px; display:grid; place-items:center; border-radius:16px;
+  background:rgba(255,255,255,.06); border:1px solid var(--stroke); font-size:22px}
+h1{margin:0; font-size:22px}
+.tagline{margin:2px 0 0; color:var(--muted)}
+.stats{display:flex; gap:10px}
+.stat{border:1px solid var(--stroke); background:rgba(255,255,255,.04); border-radius:16px; padding:10px 12px; min-width:150px}
+.statNum{font-weight:900; font-size:18px}
+.statLbl{color:var(--muted); font-size:12px}
+
+.wrap{max-width:1100px; margin:0 auto; padding:10px 18px 28px; display:flex; flex-direction:column; gap:14px}
+.card{
+  background:var(--card); border:1px solid var(--stroke); border-radius:22px; padding:16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.25);
+}
+h2{margin:0 0 10px; font-size:18px}
+h3{margin:0 0 10px; font-size:16px}
+.muted{color:var(--muted)}
+.grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
+.grid2{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
+@media (max-width:900px){ .grid3{grid-template-columns:1fr} .grid2{grid-template-columns:1fr} .stats{display:none} }
+
+.box{
+  border:1px solid var(--stroke); background:rgba(255,255,255,.035);
+  border-radius:18px; padding:14px;
+}
+.actions{display:flex; gap:10px; flex-wrap:wrap}
+.btn{
+  border:1px solid var(--stroke); background:rgba(255,255,255,.04);
+  color:var(--text); border-radius:16px; padding:12px 14px; font-weight:900; cursor:pointer;
+}
+.btn.primary{border-color:rgba(124,240,213,.55); background:rgba(124,240,213,.12)}
+.btn:hover{transform:translateY(-1px)}
+
+.toggles{display:flex; flex-wrap:wrap; gap:12px}
+.toggle{display:flex; align-items:center; gap:10px; padding:10px 12px; border:1px solid var(--stroke); border-radius:14px; background:rgba(255,255,255,.04)}
+.toggle input{display:none}
+.slider{width:44px; height:24px; border-radius:999px; background:rgba(255,255,255,.12); position:relative}
+.slider:before{content:""; position:absolute; top:3px; left:3px; width:18px; height:18px; border-radius:50%; background:var(--text); transition:all .2s ease}
+.toggle input:checked + .slider{background:rgba(124,240,213,.35)}
+.toggle input:checked + .slider:before{transform:translateX(20px)}
+.tlabel{font-weight:900}
+
+.pillrow{display:flex; flex-wrap:wrap; gap:8px}
+.pill{
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(255,255,255,.035);
+  color:var(--text);
+  padding:10px 12px;
+  border-radius:14px;
+  font-weight:900;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:92px;
+  transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+}
+.pill:hover{transform:translateY(-1px); box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.pill.active{
+  border-color: rgba(124,240,213,.85);
+  background: rgba(124,240,213,.10);
+  box-shadow: 0 0 0 2px rgba(124,240,213,.14) inset, 0 10px 24px rgba(0,0,0,.28);
+}
+
+.weekcard{display:flex; justify-content:space-between; gap:12px; align-items:flex-start}
+.weekmeta{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end}
+.badge{border:1px solid var(--stroke); background:rgba(255,255,255,.04); border-radius:999px; padding:8px 10px; font-weight:900; font-size:12px}
+
+.timelineItem{border:1px solid var(--stroke); background:rgba(255,255,255,.03); border-radius:14px; padding:10px 12px; margin-bottom:10px}
+.timelineT{font-weight:900}
+.derived{display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:10px}
+@media (max-width:900px){ .derived{grid-template-columns:1fr} }
+.derivedCard{border:1px solid var(--stroke); background:rgba(255,255,255,.03); border-radius:16px; padding:12px}
+.derivedCard h4{margin:0 0 8px}
+.switchbar{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px}
+.switchbtn{border:1px solid var(--stroke); background:rgba(255,255,255,.04); color:var(--text); padding:10px 12px; border-radius:14px; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:8px}
+.switchbtn:hover{transform:translateY(-1px)}
+
+.rowBetween{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px}
+.rowBtns{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end}
+.miniBtn{border:1px solid var(--stroke); background:rgba(255,255,255,.03); color:var(--text); padding:8px 10px; border-radius:12px; font-weight:900; cursor:pointer; font-size:12px}
+.miniBtn:hover{transform:translateY(-1px)}
+.stageTitle{display:flex; align-items:flex-start; justify-content:space-between; gap:10px}
+.stageName{font-weight:900; margin-top:2px}
+.stageToggle{border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.03); color:var(--text); padding:6px 10px; border-radius:999px; font-weight:900; cursor:pointer; font-size:12px; white-space:nowrap}
+.stageToggle:hover{transform:translateY(-1px)}
+.detailBlock{margin-top:10px; border-top:1px dashed rgba(255,255,255,.12); padding-top:10px}
+.kv{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:10px}
+@media (max-width:900px){ .kv{grid-template-columns:1fr} }
+.kv h5{margin:0; font-size:13px}
+.kv ul{margin:6px 0 0 18px}
+
+.grid2{display:grid; grid-template-columns:repeat(2,1fr); gap:12px}
+
+.sliderRange{width:100%; margin-top:10px}
+.scaleRow{display:flex; align-items:center; gap:12px; margin-top:10px}
+.scaleNum{font-weight:900}
+
+.shopGrid{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:10px}
+@media (max-width:900px){ .shopGrid{grid-template-columns:1fr} }
+.shopCat{border:1px solid rgba(255,255,255,.10); background:rgba(255,255,255,.02); border-radius:14px; padding:10px}
+.shopCat h5{margin:0 0 6px; font-size:13px}
+.shopCat ul{margin:6px 0 0 18px}
+.shopTotal{margin-top:6px; color:var(--muted); font-size:12px}
+
+.storeGrid{display:grid; grid-template-columns:1fr; gap:10px}
+.storeRow{border:1px solid rgba(255,255,255,.10); background:rgba(255,255,255,.02); border-radius:14px; padding:10px}
+.storeRow h5{margin:0 0 6px; font-size:13px}
+.storeRow ul{margin:6px 0 0 18px}
+
+/* Tabs */
+.tabbar{display:flex; flex-wrap:wrap; gap:10px; margin:12px 0; padding:10px; border:1px solid var(--stroke); background:rgba(255,255,255,.03); border-radius:18px}
+.tabbtn{border:1px solid rgba(255,255,255,.14); background:rgba(255,255,255,.02); color:var(--text); padding:10px 12px; border-radius:999px; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:8px}
+.tabbtn:hover{transform:translateY(-1px)}
+.tabbtn.active{background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.22)}
+.tabpane{margin-top:10px}
+
+/* Prep list */
+.prepGrid{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:10px}
+@media (max-width:900px){ .prepGrid{grid-template-columns:1fr} }
+.prepCat{border:1px solid rgba(255,255,255,.10); background:rgba(255,255,255,.02); border-radius:14px; padding:12px}
+.prepCat h4{margin:0 0 8px}
+.prepCat ul{margin:6px 0 0 18px}
+.prepSmall{color:var(--muted); font-size:12px; margin-top:6px}
+
+/* Checklist */
+.checkGroup{border:1px solid rgba(255,255,255,.10); background:rgba(255,255,255,.02); border-radius:14px; padding:12px; margin-top:10px}
+.checkGroup h4{margin:0 0 8px}
+.checkItem{display:flex; align-items:flex-start; gap:10px; padding:8px 0; border-top:1px dashed rgba(255,255,255,.10)}
+.checkItem:first-of-type{border-top:0}
+.checkItem input{margin-top:3px}
+.checkText{line-height:1.35}
+.checkDone{opacity:.65; text-decoration:line-through}
+
+/* Timer */
+.timer{margin-top:12px}
+.timerDisplay{font-size:44px; font-weight:900; letter-spacing:1px}
+.timerBtns{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
+.quickTimes{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
+
+
+.soundToggle{display:flex;align-items:center;gap:8px;font-size:14px}
+.soundToggle input{transform:scale(1.1)}
