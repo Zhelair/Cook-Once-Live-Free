@@ -26,8 +26,9 @@ function getAllergyState(){
 }
 
 function getPrefs(){
+  const active = document.querySelector("#proteinPills .pill.active");
   return {
-    protein: document.getElementById("prefProtein")?.value || "any",
+    protein: active?.getAttribute("data-protein") || "any",
     carb: document.getElementById("prefCarb")?.value || "any",
   };
 }
@@ -76,7 +77,7 @@ function initAutopilotUI(){
     if(buildBtn) buildBtn.textContent = "Build my weekly plan";
   }
 }
-document.addEventListener("DOMContentLoaded", ()=>{ initAutopilotUI(); wireDietToggles(); });
+document.addEventListener("DOMContentLoaded", ()=>{ initAutopilotUI(); wireDietToggles(); wireProteinPills(); });
 async function loadJSON(path){
   const res = await fetch(path, {cache:"no-store"});
   if(!res.ok) throw new Error(`Failed to load ${path}`);
@@ -399,3 +400,13 @@ document.getElementById("repeatTweak")?.addEventListener("click", async ()=>{
   if(repeatModal) repeatModal.classList.add("hidden");
   try{ await runLastPlan(true); }catch(e){ console.error(e); status("Oops. Could not repeat with tweaks."); }
 });
+function wireProteinPills(){
+  const wrap = document.getElementById("proteinPills");
+  if(!wrap) return;
+  wrap.querySelectorAll(".pill").forEach(p=>{
+    p.addEventListener("click", ()=>{
+      wrap.querySelectorAll(".pill").forEach(x=>x.classList.remove("active"));
+      p.classList.add("active");
+    });
+  });
+}
