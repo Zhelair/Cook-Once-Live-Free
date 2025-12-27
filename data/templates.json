@@ -1,0 +1,477 @@
+{
+  "version": 1,
+  "templates": [
+    {
+      "id": "t1_whole_chicken_plus_eggs",
+      "name": "Whole Chicken Week + Eggs (backup protein)",
+      "cooking_style": "batch",
+      "proteins": {
+        "primary": {
+          "key": "whole_chicken",
+          "label": "Whole chicken (1.6–2.2 kg)"
+        },
+        "secondary": {
+          "key": "eggs",
+          "label": "Eggs (10–12) — quick backup protein"
+        }
+      },
+      "equipment": [
+        "oven",
+        "pot"
+      ],
+      "hands_on_minutes": 45,
+      "total_sunday_minutes": 160,
+      "portions": {
+        "main_meals": "6–8",
+        "extras": "broth + snacks"
+      },
+      "base_blocks": [
+        {
+          "key": "roast_chicken_meat",
+          "label": "Roast chicken meat (shredded)"
+        },
+        {
+          "key": "roast_tray_veg",
+          "label": "Roasted tray vegetables (potato/carrot/onion)"
+        },
+        {
+          "key": "broth",
+          "label": "Broth (bones + scraps)"
+        },
+        {
+          "key": "boiled_eggs",
+          "label": "Boiled eggs (backup protein)"
+        }
+      ],
+      "shopping_core": {
+        "protein": [
+          "whole chicken",
+          "eggs"
+        ],
+        "veg": [
+          "potatoes",
+          "carrots",
+          "onions",
+          "garlic (optional)"
+        ],
+        "pantry": [
+          "oil",
+          "salt",
+          "pepper"
+        ],
+        "optional": [
+          "lemon",
+          "yogurt",
+          "soy sauce",
+          "ginger"
+        ]
+      },
+      "sunday_timeline": [
+        {
+          "t": "0–10 min",
+          "do": [
+            "Preheat oven (200°C).",
+            "Set out a tray + baking paper.",
+            "Put a pot of water on for eggs."
+          ]
+        },
+        {
+          "t": "10–25 min",
+          "do": [
+            "Season chicken (based on flavor style).",
+            "Chop tray vegetables.",
+            "Boil eggs (10 min), cool in cold water."
+          ]
+        },
+        {
+          "t": "25–115 min",
+          "do": [
+            "Roast chicken + tray veg (same oven).",
+            "Flip veg once.",
+            "Clean-as-you-go (you’ll thank Sunday-you)."
+          ]
+        },
+        {
+          "t": "115–140 min",
+          "do": [
+            "Rest chicken 10 min, then shred meat.",
+            "Pack meat into 3–4 containers.",
+            "Pack veg into 2–3 containers."
+          ]
+        },
+        {
+          "t": "140–160 min",
+          "do": [
+            "Simmer broth: bones + scraps + water (20 min quick broth).",
+            "Strain, cool, portion (fridge/freezer)."
+          ]
+        }
+      ],
+      "weekday_assembly": {
+        "rules": [
+          "Reheat base blocks 10–15 min.",
+          "Add carbs fresh if needed (rice/pasta/bread).",
+          "Add fresh side (salad / yogurt / pickles)."
+        ],
+        "derived_meals": [
+          {
+            "title": "🍽 Plate meal",
+            "how": [
+              "Chicken + tray veg",
+              "Add rice/pasta if you want more carbs"
+            ]
+          },
+          {
+            "title": "🍲 Soup night",
+            "how": [
+              "Broth + veg + chicken",
+              "Add noodles/rice; simmer 10 min"
+            ]
+          },
+          {
+            "title": "🥪 Sandwich / wrap",
+            "how": [
+              "Shredded chicken + sauce + greens",
+              "Bread/wrap = dinner in 3 min"
+            ]
+          },
+          {
+            "title": "🥣 Rice bowl",
+            "how": [
+              "Rice + chicken + veg",
+              "Finish with sauce (depends on flavor style)"
+            ]
+          },
+          {
+            "title": "🥚 Egg fallback",
+            "how": [
+              "2 boiled eggs + salad + bread",
+              "Or eggs + leftover veg"
+            ]
+          }
+        ]
+      },
+      "storage": {
+        "fridge_days": {
+          "chicken": "3–4",
+          "veg": "4",
+          "broth": "3",
+          "eggs": "5"
+        },
+        "freezer": [
+          "Freeze broth in 300–500 ml portions.",
+          "Freeze extra chicken if you made a lot (best within 2 months)."
+        ],
+        "label_tip": "Label containers: 'Chicken', 'Veg', 'Broth' + date. Your future self is your best friend."
+      },
+      "flavor_overrides": {
+        "european": {
+          "season_chicken": [
+            "salt",
+            "pepper",
+            "garlic",
+            "herbs",
+            "butter/olive oil"
+          ],
+          "quick_sauce": "yogurt + garlic + herbs (or just mustard)"
+        },
+        "asian": {
+          "season_chicken": [
+            "soy sauce",
+            "ginger",
+            "garlic",
+            "sesame oil"
+          ],
+          "quick_sauce": "soy + vinegar + a touch of sugar (optional)"
+        },
+        "med": {
+          "season_chicken": [
+            "olive oil",
+            "lemon zest",
+            "oregano",
+            "garlic"
+          ],
+          "quick_sauce": "yogurt + lemon + garlic"
+        },
+        "smoky": {
+          "season_chicken": [
+            "smoked paprika",
+            "cumin",
+            "salt",
+            "oil"
+          ],
+          "quick_sauce": "bbq sauce or yogurt + paprika"
+        },
+        "neutral": {
+          "season_chicken": [
+            "salt",
+            "oil",
+            "pepper (optional)"
+          ],
+          "quick_sauce": "choose per plate (ketchup/mustard/yogurt)"
+        }
+      },
+      "outputs": [
+        {
+          "label": "Cooked chicken",
+          "amount": "~1.3–1.5 kg"
+        },
+        {
+          "label": "Roasted vegetables",
+          "amount": "~700 g"
+        },
+        {
+          "label": "Broth",
+          "amount": "~1.5–2 liters"
+        },
+        {
+          "label": "Boiled eggs",
+          "amount": "10–12"
+        }
+      ],
+      "tags": {
+        "proteins": [
+          "chicken"
+        ],
+        "contains": [
+          "eggs"
+        ],
+        "excludes": []
+      },
+      "cost_level": 2
+    },
+    {
+      "id": "t2_pork_or_beef_roast_plus_goulash",
+      "name": "Roast Shoulder Week (Pork or Beef) + Goulash Leftovers",
+      "cooking_style": "batch",
+      "proteins": {
+        "primary": {
+          "key": "shoulder_roast",
+          "label": "Pork shoulder OR beef chuck (1.6–2.5 kg)"
+        },
+        "secondary": {
+          "key": "beans_or_eggs",
+          "label": "Eggs or beans (backup protein)"
+        }
+      },
+      "equipment": [
+        "oven",
+        "pot"
+      ],
+      "hands_on_minutes": 55,
+      "total_sunday_minutes": 190,
+      "portions": {
+        "main_meals": "8–10",
+        "extras": "stew + broth (optional)"
+      },
+      "base_blocks": [
+        {
+          "key": "roast_meat",
+          "label": "Roast meat (sliced + shredded)"
+        },
+        {
+          "key": "roast_tray_veg",
+          "label": "Roasted tray vegetables (potato/carrot/onion)"
+        },
+        {
+          "key": "goulash_pot",
+          "label": "Goulash / stew pot (from trimmings + veg)"
+        },
+        {
+          "key": "broth_optional",
+          "label": "Optional quick broth (bones/scraps if available)"
+        }
+      ],
+      "shopping_core": {
+        "protein": [
+          "pork shoulder OR beef chuck",
+          "eggs OR canned beans"
+        ],
+        "veg": [
+          "potatoes",
+          "carrots",
+          "onions",
+          "garlic (optional)",
+          "paprika (sweet)"
+        ],
+        "pantry": [
+          "oil",
+          "salt",
+          "pepper"
+        ],
+        "optional": [
+          "tomato paste",
+          "bay leaf",
+          "mustard",
+          "pickles"
+        ]
+      },
+      "sunday_timeline": [
+        {
+          "t": "0–15 min",
+          "do": [
+            "Preheat oven (200°C).",
+            "Season roast (based on flavor style).",
+            "Chop tray vegetables."
+          ]
+        },
+        {
+          "t": "15–150 min",
+          "do": [
+            "Roast meat + tray veg (same oven).",
+            "Flip veg once.",
+            "While it roasts, start stew base in a pot (onion + paprika + trimmings)."
+          ]
+        },
+        {
+          "t": "150–170 min",
+          "do": [
+            "Rest meat 10 min, then slice/shred.",
+            "Pack meat into 3–4 containers.",
+            "Pack veg into 2–3 containers."
+          ]
+        },
+        {
+          "t": "170–190 min",
+          "do": [
+            "Finish goulash: add water/stock + veg + tomato paste (optional), simmer 15–20 min.",
+            "Portion and cool."
+          ]
+        }
+      ],
+      "weekday_assembly": {
+        "rules": [
+          "Reheat meat/veg 10–15 min.",
+          "Use stew as a separate dinner or as sauce.",
+          "Add fresh side (salad/pickles/yogurt)."
+        ],
+        "derived_meals": [
+          {
+            "title": "🍽 Plate meal",
+            "how": [
+              "Roast meat + tray veg",
+              "Add rice/pasta if needed"
+            ]
+          },
+          {
+            "title": "🍲 Goulash night",
+            "how": [
+              "Stew pot + bread",
+              "Or stew over rice"
+            ]
+          },
+          {
+            "title": "🥪 Sandwich / wrap",
+            "how": [
+              "Shredded meat + mustard/pickles",
+              "Bread/wrap = dinner in 3 min"
+            ]
+          },
+          {
+            "title": "🥣 Bowl meal",
+            "how": [
+              "Rice/pasta + meat + veg",
+              "Finish with sauce from stew"
+            ]
+          },
+          {
+            "title": "🥚 Backup meal",
+            "how": [
+              "Eggs/beans + salad + bread",
+              "Minimal effort"
+            ]
+          }
+        ]
+      },
+      "storage": {
+        "fridge_days": {
+          "meat": "3–4",
+          "veg": "4",
+          "stew": "3–4",
+          "broth": "3"
+        },
+        "freezer": [
+          "Freeze stew in single-meal portions (best within 2 months).",
+          "Freeze extra meat if you cooked big (best within 2 months)."
+        ],
+        "label_tip": "Label containers: 'Meat', 'Veg', 'Stew' + date. Sunday-you is a legend."
+      },
+      "outputs": [
+        {
+          "label": "Cooked meat",
+          "amount": "~1.2–1.8 kg"
+        },
+        {
+          "label": "Roasted vegetables",
+          "amount": "~800 g–1.2 kg"
+        },
+        {
+          "label": "Stew / goulash",
+          "amount": "~1.5–2.5 liters"
+        },
+        {
+          "label": "Backup protein (eggs/beans)",
+          "amount": "ready for 2–3 meals"
+        }
+      ],
+      "flavor_overrides": {
+        "european": {
+          "season_roast": [
+            "salt",
+            "pepper",
+            "garlic",
+            "herbs",
+            "mustard (optional)"
+          ],
+          "quick_finish": "pickles + mustard = instant dinner vibe"
+        },
+        "asian": {
+          "season_roast": [
+            "soy sauce",
+            "ginger",
+            "garlic",
+            "sesame oil"
+          ],
+          "quick_finish": "soy + vinegar + chili (optional)"
+        },
+        "med": {
+          "season_roast": [
+            "olive oil",
+            "lemon",
+            "oregano",
+            "garlic"
+          ],
+          "quick_finish": "yogurt + lemon + garlic"
+        },
+        "smoky": {
+          "season_roast": [
+            "smoked paprika",
+            "cumin",
+            "salt",
+            "oil"
+          ],
+          "quick_finish": "bbq sauce or paprika yogurt"
+        },
+        "neutral": {
+          "season_roast": [
+            "salt",
+            "oil",
+            "pepper (optional)"
+          ],
+          "quick_finish": "choose per plate"
+        }
+      },
+      "tags": {
+        "proteins": [
+          "pork",
+          "beef"
+        ],
+        "contains": [
+          "paprika"
+        ],
+        "excludes": []
+      },
+      "cost_level": 2
+    }
+  ]
+}
