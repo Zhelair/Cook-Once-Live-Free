@@ -1,0 +1,42 @@
+{
+  "diets": [
+    {
+      "id": "omnivore",
+      "label": "\ud83e\udd69 Omnivore"
+    },
+    {
+      "id": "no_pork",
+      "label": "\ud83d\udc37 No pork"
+    },
+    {
+      "id": "no_veal",
+      "label": "\ud83d\udc2e No veal"
+    },
+    {
+      "id": "vegetarian",
+      "label": "\ud83c\udf31 Vegetarian"
+    },
+    {
+      "id": "pescatarian",
+      "label": "\ud83d\udc1f Pescatarian"
+    }
+  ],
+  "allergies": [
+    {
+      "id": "nuts",
+      "label": "Nuts"
+    },
+    {
+      "id": "dairy",
+      "label": "Dairy"
+    },
+    {
+      "id": "eggs",
+      "label": "Eggs"
+    },
+    {
+      "id": "gluten",
+      "label": "Gluten"
+    }
+  ]
+}
