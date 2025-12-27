@@ -1,0 +1,216 @@
+{
+  "version": 1,
+  "templates": [
+    {
+      "id": "t1_whole_chicken_plus_eggs",
+      "name": "Whole Chicken Week + Eggs (backup protein)",
+      "cooking_style": "batch",
+      "proteins": {
+        "primary": {
+          "key": "whole_chicken",
+          "label": "Whole chicken (1.6–2.2 kg)"
+        },
+        "secondary": {
+          "key": "eggs",
+          "label": "Eggs (10–12) — quick backup protein"
+        }
+      },
+      "equipment": [
+        "oven",
+        "pot"
+      ],
+      "hands_on_minutes": 45,
+      "total_sunday_minutes": 160,
+      "portions": {
+        "main_meals": "6–8",
+        "extras": "broth + snacks"
+      },
+      "base_blocks": [
+        {
+          "key": "roast_chicken_meat",
+          "label": "Roast chicken meat (shredded)"
+        },
+        {
+          "key": "roast_tray_veg",
+          "label": "Roasted tray vegetables (potato/carrot/onion)"
+        },
+        {
+          "key": "broth",
+          "label": "Broth (bones + scraps)"
+        },
+        {
+          "key": "boiled_eggs",
+          "label": "Boiled eggs (backup protein)"
+        }
+      ],
+      "shopping_core": {
+        "protein": [
+          "whole chicken",
+          "eggs"
+        ],
+        "veg": [
+          "potatoes",
+          "carrots",
+          "onions",
+          "garlic (optional)"
+        ],
+        "pantry": [
+          "oil",
+          "salt",
+          "pepper"
+        ],
+        "optional": [
+          "lemon",
+          "yogurt",
+          "soy sauce",
+          "ginger"
+        ]
+      },
+      "sunday_timeline": [
+        {
+          "t": "0–10 min",
+          "do": [
+            "Preheat oven (200°C).",
+            "Set out a tray + baking paper.",
+            "Put a pot of water on for eggs."
+          ]
+        },
+        {
+          "t": "10–25 min",
+          "do": [
+            "Season chicken (based on flavor style).",
+            "Chop tray vegetables.",
+            "Boil eggs (10 min), cool in cold water."
+          ]
+        },
+        {
+          "t": "25–115 min",
+          "do": [
+            "Roast chicken + tray veg (same oven).",
+            "Flip veg once.",
+            "Clean-as-you-go (you’ll thank Sunday-you)."
+          ]
+        },
+        {
+          "t": "115–140 min",
+          "do": [
+            "Rest chicken 10 min, then shred meat.",
+            "Pack meat into 3–4 containers.",
+            "Pack veg into 2–3 containers."
+          ]
+        },
+        {
+          "t": "140–160 min",
+          "do": [
+            "Simmer broth: bones + scraps + water (20 min quick broth).",
+            "Strain, cool, portion (fridge/freezer)."
+          ]
+        }
+      ],
+      "weekday_assembly": {
+        "rules": [
+          "Reheat base blocks 10–15 min.",
+          "Add carbs fresh if needed (rice/pasta/bread).",
+          "Add fresh side (salad / yogurt / pickles)."
+        ],
+        "derived_meals": [
+          {
+            "title": "🍽 Plate meal",
+            "how": [
+              "Chicken + tray veg",
+              "Add rice/pasta if you want more carbs"
+            ]
+          },
+          {
+            "title": "🍲 Soup night",
+            "how": [
+              "Broth + veg + chicken",
+              "Add noodles/rice; simmer 10 min"
+            ]
+          },
+          {
+            "title": "🥪 Sandwich / wrap",
+            "how": [
+              "Shredded chicken + sauce + greens",
+              "Bread/wrap = dinner in 3 min"
+            ]
+          },
+          {
+            "title": "🥣 Rice bowl",
+            "how": [
+              "Rice + chicken + veg",
+              "Finish with sauce (depends on flavor style)"
+            ]
+          },
+          {
+            "title": "🥚 Egg fallback",
+            "how": [
+              "2 boiled eggs + salad + bread",
+              "Or eggs + leftover veg"
+            ]
+          }
+        ]
+      },
+      "storage": {
+        "fridge_days": {
+          "chicken": "3–4",
+          "veg": "4",
+          "broth": "3",
+          "eggs": "5"
+        },
+        "freezer": [
+          "Freeze broth in 300–500 ml portions.",
+          "Freeze extra chicken if you made a lot (best within 2 months)."
+        ],
+        "label_tip": "Label containers: 'Chicken', 'Veg', 'Broth' + date. Your future self is your best friend."
+      },
+      "flavor_overrides": {
+        "european": {
+          "season_chicken": [
+            "salt",
+            "pepper",
+            "garlic",
+            "herbs",
+            "butter/olive oil"
+          ],
+          "quick_sauce": "yogurt + garlic + herbs (or just mustard)"
+        },
+        "asian": {
+          "season_chicken": [
+            "soy sauce",
+            "ginger",
+            "garlic",
+            "sesame oil"
+          ],
+          "quick_sauce": "soy + vinegar + a touch of sugar (optional)"
+        },
+        "med": {
+          "season_chicken": [
+            "olive oil",
+            "lemon zest",
+            "oregano",
+            "garlic"
+          ],
+          "quick_sauce": "yogurt + lemon + garlic"
+        },
+        "smoky": {
+          "season_chicken": [
+            "smoked paprika",
+            "cumin",
+            "salt",
+            "oil"
+          ],
+          "quick_sauce": "bbq sauce or yogurt + paprika"
+        },
+        "neutral": {
+          "season_chicken": [
+            "salt",
+            "oil",
+            "pepper (optional)"
+          ],
+          "quick_sauce": "choose per plate (ketchup/mustard/yogurt)"
+        }
+      }
+    }
+  ]
+}
