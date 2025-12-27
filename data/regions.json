@@ -1,0 +1,188 @@
+{
+  "regions": [
+    {
+      "id": "balkans",
+      "label": "Balkans / Eastern Europe",
+      "flags": "🇧🇬🇷🇴🇷🇸",
+      "hint": "Staples: peppers, yogurt, beans",
+      "staples": [
+        "onion",
+        "potato",
+        "rice",
+        "chicken",
+        "egg",
+        "beans",
+        "yogurt",
+        "pepper",
+        "tomato",
+        "cabbage",
+        "garlic"
+      ]
+    },
+    {
+      "id": "central_eu",
+      "label": "Central / Western Europe",
+      "flags": "🇩🇪🇫🇷🇦🇹",
+      "hint": "Staples: bread, cheese, pork",
+      "staples": [
+        "onion",
+        "potato",
+        "bread",
+        "cheese",
+        "egg",
+        "chicken",
+        "pork",
+        "carrot",
+        "cabbage",
+        "butter",
+        "cream"
+      ]
+    },
+    {
+      "id": "mediterranean",
+      "label": "Mediterranean",
+      "flags": "🇪🇸🇮🇹🇬🇷",
+      "hint": "Staples: olive oil, tomato, fish",
+      "staples": [
+        "olive oil",
+        "tomato",
+        "garlic",
+        "onion",
+        "pasta",
+        "rice",
+        "chickpeas",
+        "lemon",
+        "fish",
+        "chicken",
+        "feta"
+      ]
+    },
+    {
+      "id": "nordics",
+      "label": "Nordics",
+      "flags": "🇸🇪🇳🇴🇫🇮",
+      "hint": "Staples: salmon, oats, potatoes",
+      "staples": [
+        "potato",
+        "salmon",
+        "fish",
+        "bread",
+        "butter",
+        "onion",
+        "egg",
+        "cabbage",
+        "oats",
+        "cream"
+      ]
+    },
+    {
+      "id": "north_america",
+      "label": "North America",
+      "flags": "🇺🇸🇨🇦",
+      "hint": "Staples: beans, pasta, chicken",
+      "staples": [
+        "onion",
+        "rice",
+        "chicken",
+        "beans",
+        "egg",
+        "garlic",
+        "tomato",
+        "pepper",
+        "pasta",
+        "cheese"
+      ]
+    },
+    {
+      "id": "latin_america",
+      "label": "Latin America",
+      "flags": "🇲🇽🇧🇷🇦🇷",
+      "hint": "Staples: corn, beans, lime",
+      "staples": [
+        "beans",
+        "rice",
+        "corn",
+        "chicken",
+        "onion",
+        "tomato",
+        "lime",
+        "pepper",
+        "avocado",
+        "cilantro"
+      ]
+    },
+    {
+      "id": "middle_east",
+      "label": "Middle East",
+      "flags": "🇹🇷🇱🇧🇮🇱",
+      "hint": "Staples: chickpeas, yogurt, lemon",
+      "staples": [
+        "chickpeas",
+        "lentils",
+        "yogurt",
+        "garlic",
+        "onion",
+        "rice",
+        "lemon",
+        "cucumber",
+        "tomato",
+        "chicken",
+        "tahini"
+      ]
+    },
+    {
+      "id": "south_asia",
+      "label": "South Asia",
+      "flags": "🇮🇳🇵🇰🇱🇰",
+      "hint": "Staples: lentils, spices, rice",
+      "staples": [
+        "rice",
+        "lentils",
+        "chickpeas",
+        "yogurt",
+        "onion",
+        "garlic",
+        "ginger",
+        "tomato",
+        "spices",
+        "chicken"
+      ]
+    },
+    {
+      "id": "east_asia",
+      "label": "East Asia",
+      "flags": "🇯🇵🇰🇷🇨🇳",
+      "hint": "Staples: noodles, soy, ginger",
+      "staples": [
+        "rice",
+        "noodles",
+        "soy sauce",
+        "ginger",
+        "garlic",
+        "egg",
+        "chicken",
+        "cabbage",
+        "carrot",
+        "sesame oil"
+      ]
+    },
+    {
+      "id": "global",
+      "label": "Global / Mixed",
+      "flags": "🌍",
+      "hint": "A bit of everything",
+      "staples": [
+        "onion",
+        "garlic",
+        "tomato",
+        "rice",
+        "pasta",
+        "egg",
+        "chicken",
+        "beans",
+        "potato",
+        "cheese"
+      ]
+    }
+  ]
+}
