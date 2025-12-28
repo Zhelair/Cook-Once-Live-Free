@@ -1,67 +1,77 @@
 body {
-  font-family: system-ui, sans-serif;
   margin: 0;
-  background: #fafafa;
-  color: #222;
+  font-family: system-ui, sans-serif;
+  background: #0f172a;
+  color: #e5e7eb;
 }
 
-header, footer {
-  text-align: center;
+header {
   padding: 1.5rem;
-  background: #fff;
-  border-bottom: 1px solid #ddd;
+  background: #020617;
 }
 
-footer {
-  border-top: 1px solid #ddd;
-  border-bottom: none;
+h1 {
+  margin: 0;
 }
 
-#app {
-  max-width: 700px;
-  margin: 2rem auto;
-  padding: 1rem;
-}
-
-.recipe-card {
-  background: #fff;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-}
-
-.meta {
-  display: flex;
+.controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1rem;
-  font-size: 0.9rem;
-  color: #666;
+  padding: 1rem;
+  background: #020617;
 }
 
-.toggle-btn {
-  margin-top: 1rem;
-  padding: 0.6rem 1rem;
+.control label {
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+small {
+  color: #9ca3af;
+}
+
+.tabs {
+  display: flex;
+  background: #020617;
+  border-bottom: 1px solid #1e293b;
+}
+
+.tabs button {
+  flex: 1;
+  padding: 0.8rem;
+  background: none;
+  color: #9ca3af;
   border: none;
-  background: #222;
-  color: #fff;
-  border-radius: 4px;
   cursor: pointer;
 }
 
-.toggle-btn:hover {
-  opacity: 0.9;
+.tabs button.active {
+  color: #e5e7eb;
+  border-bottom: 2px solid #38bdf8;
 }
 
-.steps {
-  margin-top: 1rem;
-}
-
-.hidden {
+.tab {
   display: none;
+  padding: 1.2rem;
 }
 
-.chef-notes {
-  margin-top: 1rem;
-  background: #f5f5f5;
+.tab.active {
+  display: block;
+}
+
+.card {
+  background: #020617;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
   padding: 1rem;
-  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+ul {
+  padding-left: 1.2rem;
+}
+
+.timer-controls button {
+  margin-left: 0.5rem;
 }
