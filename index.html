@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cook Once, Live Free v2.0</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <div class="logo">🍲</div>
+      <div>
+        <h1>Cook Once, Live Free</h1>
+        <p class="tagline">One Sunday decision replaces five weekday ones.</p>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="statNum" id="decisionsAvoided">0</div><div class="statLbl">Decisions avoided</div></div>
+      <div class="stat"><div class="statNum" id="cleanupScore">–</div><div class="statLbl">Cleanup score</div></div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card" id="historyCard">
+      <div class="rowBetween">
+        <h2>Your Recent Sundays</h2>
+        <button class="miniBtn" id="toggleHistory">Show history</button>
+      </div>
+      <div id="historyContent" hidden>
+        <div class="muted" style="margin:8px 0">Last 4 weeks – helps us suggest variety</div>
+        <div id="historyList"></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Constraints</h2>
+      <div class="toggles">
+        <label class="toggle"><input type="checkbox" id="noPorkToggle"><span class="slider"></span><span class="tlabel">🚫 No pork</span></label>
+        <label class="toggle"><input type="checkbox" id="noBeefToggle"><span class="slider"></span><span class="tlabel">🚫 No beef</span></label>
+        <label class="toggle"><input type="checkbox" id="noFishToggle"><span class="slider"></span><span class="tlabel">🚫 No fish & seafood</span></label>
+      </div>
+      <p class="muted" style="margin:10px 0 0">Strict exclusions: enabled items will be excluded from suggestions.</p>
+
+      <div class="grid3" style="margin-top:12px">
+        <div class="box">
+          <h4>Protein vibe</h4>
+          <div class="pillrow" id="proteinPills">
+            <button class="pill active" data-protein="any">✨ Any</button>
+            <button class="pill" data-protein="chicken">🍗 Chicken</button>
+            <button class="pill" data-protein="beef">🥩 Beef</button>
+            <button class="pill" data-protein="pork">🐷 Pork</button>
+            <button class="pill" data-protein="fish">🐟 Fish</button>
+            <button class="pill" data-protein="vegetarian">🥕 Veg</button>
+          </div>
+        </div>
+        <div class="box">
+          <h4>Budget vibe</h4>
+          <div class="pillrow" id="budgetPills">
+            <button class="pill" data-budget="1">💰 Cheap</button>
+            <button class="pill active" data-budget="2">💰💰 Normal</button>
+            <button class="pill" data-budget="3">💰💰💰 Premium</button>
+          </div>
+          <p class="muted" style="margin:10px 0 0">Soft preference. We'll lean toward cheaper or premium templates.</p>
+        </div>
+        <div class="box">
+          <h4>Batch style</h4>
+          <div class="pillrow" id="modePills">
+            <button class="pill active" data-mode="batch">🫕 Batch</button>
+            <button class="pill" data-mode="mixed">🥘 Mixed batch</button>
+            <button class="pill" data-mode="freeze">🧊 Cook & freeze</button>
+          </div>
+          <p class="muted" style="margin:10px 0 0">This biases which template we pick (doesn't block).</p>
+          <div class="divider" style="height:12px"></div>
+          <h4 style="margin:0 0 8px">Cook with</h4>
+          <div class="pillrow" id="kitchenPills">
+            <button class="pill active" data-kitchen="smart">✨ Smart</button>
+            <button class="pill" data-kitchen="raw">🥗 Raw</button>
+            <button class="pill" data-kitchen="stove">♨️ Stove</button>
+            <button class="pill" data-kitchen="oven">🔥+♨️ Oven+Stove</button>
+            <button class="pill" data-kitchen="multi">🍲 Multi-cooker</button>
+            <button class="pill" data-kitchen="micro">⚡ Microwave</button>
+          </div>
+          <p class="muted" style="margin:10px 0 0">Changes the workflow steps (not just the tool list).</p>
+        </div>
+      </div>
+
+      <div class="grid2" style="margin-top:12px">
+        <div class="box">
+          <h4>Flavor mode</h4>
+          <div class="pillrow" id="flavorPills">
+            <button class="pill active" data-flavor="neutral">🙂 Neutral</button>
+            <button class="pill" data-flavor="european">🥖 European</button>
+            <button class="pill" data-flavor="med">🍋 Med</button>
+            <button class="pill" data-flavor="asian">🥢 Asian-ish</button>
+            <button class="pill" data-flavor="smoky">🔥 Smoky</button>
+          </div>
+          <p class="muted" style="margin:10px 0 0">This doesn't change the template – it changes the seasoning + pantry add-ons.</p>
+        </div>
+
+        <div class="box">
+          <div class="rowBetween" style="margin-bottom:6px">
+            <h4 style="margin:0">Scale (meals)</h4>
+            <div class="muted"><span id="scaleMeals">6</span> meals</div>
+          </div>
+          <input id="scaleSlider" class="sliderRange" type="range" min="4" max="10" step="2" value="6" />
+          <p class="muted" style="margin:10px 0 0">Scales shopping + outputs.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Build your Sunday plan</h2>
+      <div class="actions">
+        <button class="btn primary" id="buildBtn">Build a weekly plan</button>
+        <button class="btn" id="repeatBtn">Run last Sunday again</button>
+      </div>
+      <p class="muted" id="status" style="margin-top:10px"></p>
+    </section>
+
+    <section class="card" id="output" hidden>
+      <div class="weekcard">
+        <div>
+          <h2 id="planTitle">Your Week</h2>
+          <p class="muted" id="planSubtitle"></p>
+        </div>
+        <div class="weekmeta">
+          <span class="badge" id="badgeMode"></span>
+          <span class="badge" id="badgeBudget"></span>
+          <span class="badge" id="badgeCleanup"></span>
+        </div>
+      </div>
+
+      <div class="tabbar" role="tablist">
+        <button class="tabbtn active" data-tab="planTab">🗓️ Plan</button>
+        <button class="tabbtn" data-tab="prepTab">🛒 Prep</button>
+        <button class="tabbtn" data-tab="subsTab">🔄 Swaps</button>
+        <button class="tabbtn" data-tab="chefTab">👩‍🍳 Chef</button>
+        <button class="tabbtn" data-tab="cookTab">✅ Cook</button>
+      </div>
+
+      <section class="tabpane active" id="planTab">
+        <div class="grid2">
+          <div>
+            <div class="box">
+              <h3>Sunday station</h3>
+              <div class="muted">Tools, containers, order</div>
+              <div id="station"></div>
+            </div>
+
+            <div class="box" style="margin-top:12px">
+              <div class="rowBetween">
+                <h3 style="margin:0">Sunday timeline</h3>
+                <div class="rowBtns">
+                  <button class="miniBtn" id="openChefTab">Chef tips</button>
+                </div>
+              </div>
+              <div id="timeline"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="box">
+              <h3>After Sunday you'll have</h3>
+              <ul id="outputs"></ul>
+              <div id="yieldRow"></div>
+            </div>
+
+            <div class="box" style="margin-top:12px">
+              <h3>Shopping list</h3>
+              <div class="muted">Approximate amounts</div>
+              <div id="shopping"></div>
+            </div>
+
+            <div class="box" style="margin-top:12px">
+              <h3>Storage</h3>
+              <div id="storage"></div>
+            </div>
+
+            <div class="box" style="margin-top:12px">
+              <h3>Flavor notes</h3>
+              <div id="flavorNotes"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="box" style="margin-top:12px">
+          <h3>Derived meals</h3>
+          <div class="muted">Quick assembly ideas</div>
+          <div id="derived" class="derived"></div>
+        </div>
+      </section>
+
+      <section class="tabpane" id="prepTab" hidden>
+        <div class="box">
+          <div class="rowBetween">
+            <h3 style="margin:0">Ingredients (scaled)</h3>
+            <div class="rowBtns">
+              <button class="miniBtn" id="copyPrep">Copy list</button>
+            </div>
+          </div>
+          <div id="prepIngredients"></div>
+        </div>
+      </section>
+
+      <section class="tabpane" id="subsTab" hidden>
+        <div class="box">
+          <h3>Ingredient Substitutions</h3>
+          <div class="muted">Don't have something? Here are smart swaps.</div>
+          <div id="substitutionsList"></div>
+        </div>
+      </section>
+
+      <section class="tabpane" id="chefTab" hidden>
+        <div class="grid2">
+          <div class="box">
+            <h3>Chef suggestions</h3>
+            <div id="chefSuggestions"></div>
+          </div>
+          <div class="box">
+            <h3>Kitchen mode</h3>
+            <div id="chefModesNote"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="tabpane" id="cookTab" hidden>
+        <div class="grid2">
+          <div class="box">
+            <div class="rowBetween">
+              <h3 style="margin:0">Checklist</h3>
+              <div class="rowBtns">
+                <button class="miniBtn" id="checkAll">Check all</button>
+                <button class="miniBtn" id="uncheckAll">Uncheck</button>
+                <button class="miniBtn" id="resetToday">Reset</button>
+              </div>
+            </div>
+            <div class="muted">Saved locally per day</div>
+            <div id="cookChecklist"></div>
+          </div>
+
+          <div class="box">
+            <div class="rowBetween">
+              <h3 style="margin:0">Kitchen timer</h3>
+              <div class="muted" id="timerState">Ready</div>
+            </div>
+            <div class="timer">
+              <div class="timerDisplay" id="timerDisplay">00:00</div>
+              <div class="timerBtns">
+                <button class="btn" id="timerStart">Start</button>
+                <button class="btn" id="timerPause">Pause</button>
+                <button class="btn" id="timerReset">Reset</button>
+              </div>
+              <div class="rowBetween" style="margin-top:8px">
+                <label class="soundToggle"><input type="checkbox" id="timerSound"> Disable sound</label>
+                <button class="miniBtn" id="timerTestSound">Test</button>
+              </div>
+              <div class="quickTimes">
+                <button class="pill" data-min="5">5m</button>
+                <button class="pill" data-min="10">10m</button>
+                <button class="pill" data-min="15">15m</button>
+                <button class="pill" data-min="30">30m</button>
+                <button class="pill" data-min="45">45m</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="switchbar">
+        <button class="switchbtn" id="swapSimilar">🔁 Swap template</button>
+        <button class="switchbtn" id="swapCheaper">⬇ Cheaper</button>
+        <button class="switchbtn" id="swapPremium">⬆ Premium</button>
+      </div>
+
+      <div class="box" style="margin-top:12px">
+        <h3>Rate this week</h3>
+        <div class="muted">Help us learn what you like</div>
+        <div class="pillrow" id="ratingStars" style="margin-top:10px">
+          <button class="pill" data-rating="1">⭐</button>
+          <button class="pill" data-rating="2">⭐⭐</button>
+          <button class="pill" data-rating="3">⭐⭐⭐</button>
+          <button class="pill" data-rating="4">⭐⭐⭐⭐</button>
+          <button class="pill" data-rating="5">⭐⭐⭐⭐⭐</button>
+        </div>
+        <textarea id="ratingNotes" placeholder="Optional: what worked? what didn't?" style="width:100%; margin-top:10px; padding:10px; border-radius:12px; border:1px solid var(--stroke); background:rgba(255,255,255,.04); color:var(--text); font-family:inherit; resize:vertical" rows="2"></textarea>
+        <button class="btn primary" id="saveRating" style="margin-top:10px">Save rating</button>
+        <div id="ratingStatus" class="muted" style="margin-top:8px"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+  <audio id="alarmAudio" preload="auto" src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OWhUhELTKXh8bllHAU2jtryz3QnBSl+zPLaizsKGGS37OyeUQ=="></audio>
+</body>
+</html>
