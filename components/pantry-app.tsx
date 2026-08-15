@@ -42,6 +42,7 @@ export function PantryApp() {
   const [accessToken, setAccessToken] = useState("");
   const [email, setEmail] = useState("");
   const [authOpen, setAuthOpen] = useState(false);
+  const [byokKey, setByokKey] = useState("");
   const t = copy[locale];
 
   useEffect(() => {
@@ -50,6 +51,7 @@ export function PantryApp() {
     const localKitchen = window.localStorage.getItem("quiet-pantry-kitchen");
     if (localKitchen) { try { const value = JSON.parse(localKitchen); if (Array.isArray(value.recipes)) setRecipes(value.recipes); if (Array.isArray(value.dealItems)) setDealItems(value.dealItems); if (typeof value.dealText === "string") setDealText(value.dealText); } catch {} }
     if ("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(() => undefined);
+    setByokKey(window.localStorage.getItem("quiet-pantry-byok") || "");
   }, []);
   useEffect(() => {
     const supabase = getSupabaseBrowser();
@@ -60,12 +62,13 @@ export function PantryApp() {
   }, []);
   useEffect(() => { window.localStorage.setItem("quiet-pantry-settings", JSON.stringify({ theme, locale, sound, companion })); }, [theme, locale, sound, companion]);
   useEffect(() => { window.localStorage.setItem("quiet-pantry-kitchen", JSON.stringify({ recipes, dealItems, dealText })); }, [recipes, dealItems, dealText]);
+  useEffect(() => { if (byokKey) window.localStorage.setItem("quiet-pantry-byok", byokKey); else window.localStorage.removeItem("quiet-pantry-byok"); }, [byokKey]);
 
   const content = useMemo(() => {
     if (page === "plan") return <PlanRoom onCook={() => setPage("home")} onAsk={() => setChat("Make a cheap 3-day batch plan from my confirmed offers.")} />;
     if (page === "recipes") return <RecipeShelf recipes={recipes} onCreate={() => setBuilderOpen(true)} />;
     if (page === "shop") return <DealDesk dealText={dealText} setDealText={setDealText} dealItems={dealItems} setDealItems={setDealItems} />;
-    if (page === "more") return <MoreRoom theme={theme} setTheme={setTheme} locale={locale} setLocale={setLocale} sound={sound} setSound={setSound} companion={companion} setCompanion={setCompanion} />;
+    if (page === "more") return <MoreRoom theme={theme} setTheme={setTheme} locale={locale} setLocale={setLocale} sound={sound} setSound={setSound} companion={companion} setCompanion={setCompanion} byokKey={byokKey} setByokKey={setByokKey} />;
     return <HomeRoom t={t} dealItems={dealItems} onPlan={() => setPage("plan")} onDeals={() => setPage("shop")} onRecipes={() => setPage("recipes")} />;
   }, [page, theme, locale, sound, companion, recipes, dealText, dealItems, t]);
 
@@ -73,10 +76,10 @@ export function PantryApp() {
     if (!chat.trim() || thinking) return;
     setThinking(true);
     try {
-      const response = await fetch("/api/ai", { method: "POST", headers: { "Content-Type": "application/json", ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}) }, body: JSON.stringify({ prompt: chat, action: "miro_kitchen_help" }) });
+      const response = await fetch("/api/ai", { method: "POST", headers: { "Content-Type": "application/json", ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}), ...(byokKey ? { "X-Quiet-Pantry-BYOK": byokKey } : {}) }, body: JSON.stringify({ prompt: chat, action: "miro_kitchen_help" }) });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "Miro is resting.");
-      setChatAnswer(data.content); setCredits(data.creditsRemaining ?? credits);
+      setChatAnswer(data.content); if (!data.byok) setCredits(data.creditsRemaining ?? credits);
     } catch (error) { setChatAnswer(error instanceof Error ? error.message : "Miro could not answer right now."); }
     finally { setThinking(false); }
   }
@@ -118,7 +121,7 @@ function DealDesk({ dealText, setDealText, dealItems, setDealItems }: { dealText
   return <section className="page-flow"><div className="page-heading"><div><p className="eyebrow">MARKET BOARD</p><h1>Bring the shop into your kitchen.</h1><p>Paste text, add a .txt list, upload a leaflet or scan a receipt. Nothing is stored remotely.</p></div></div><div className="deal-grid"><article className="import-card"><div className="drop-zone"><Upload size={28}/><h2>Drop a leaflet, receipt or list</h2><p>PDF, image, camera or .txt. Files stay in this browser.</p><label className="secondary"><FileText size={16}/>Choose a file<input type="file" accept=".txt,text/plain,.pdf,image/*" onChange={loadFile}/></label></div><div className="or">or paste ingredient / offer text</div><textarea value={dealText} onChange={(event) => setDealText(event.target.value)} onBlur={(event) => parseInput(event.target.value)} placeholder={"Pork loin 5.43 BGN/kg\nPotatoes 1.65 BGN / 2.5 kg\nMushrooms 1.39 BGN"}/><p className="hint">Plain text parsing is free. Ask Miro only for a messy flyer or receipt.</p></article><article className="confirm-card"><p className="eyebrow">CONFIRM DETECTED ITEMS</p><h2>What should enter your Deal Memory?</h2><div className="confirm-list">{dealItems.map((item, index) => <div key={`${item}-${index}`}><span className="check">✓</span><input value={item} onChange={(event) => setDealItems(dealItems.map((old, i) => i === index ? event.target.value : old))}/><button aria-label="Remove item" onClick={() => setDealItems(dealItems.filter((_, i) => i !== index))}><X size={15}/></button></div>)}</div><button className="secondary wide" onClick={() => setDealItems([...dealItems, "New item"])}><Plus size={16}/>Add item</button><button className="primary wide"><ReceiptText size={17}/>Save locally to Deal Memory</button></article></div></section>;
 }
 
-function MoreRoom({ theme, setTheme, locale, setLocale, sound, setSound, companion, setCompanion }: { theme: Theme; setTheme: (theme: Theme) => void; locale: Locale; setLocale: (locale: Locale) => void; sound: boolean; setSound: (value: boolean) => void; companion: boolean; setCompanion: (value: boolean) => void }) { return <section className="page-flow settings-room"><div className="page-heading"><div><p className="eyebrow">QUIET SETTINGS</p><h1>Make the kitchen feel like yours.</h1></div></div><article className="settings-card"><h2><Languages size={20}/>Language</h2><div className="option-grid">{(["EN", "RU", "BG"] as Locale[]).map((item) => <button className={locale === item ? "selected" : ""} onClick={() => setLocale(item)} key={item}>{item === "EN" ? "English" : item === "RU" ? "Русский" : "Български"}</button>)}</div></article><article className="settings-card"><h2><Sun size={20}/>Atmosphere</h2><div className="theme-grid">{(["daylight", "dark", "pantry"] as Theme[]).map((item) => <button className={`theme-choice ${item} ${theme === item ? "selected" : ""}`} onClick={() => setTheme(item)} key={item}><i/>{item === "daylight" ? "Daylight Kitchen" : item === "dark" ? "Dark After-Hours" : "Quiet Pantry"}</button>)}</div></article><article className="settings-card toggle-card"><div><h2><Volume2 size={20}/>Kitchen sounds</h2><p>Only after you interact. Never essential to the plan.</p></div><Toggle value={sound} onChange={setSound}/></article><article className="settings-card toggle-card"><div><h2>🐭 Miro, your pantry mouse</h2><p>Local companion; AI is always a separate 31-credit action.</p></div><Toggle value={companion} onChange={setCompanion}/></article><article className="settings-card data-card"><div><h2>Local data</h2><p>Recipes, history, flyers and pantry remain in this browser. JSON export/import is coming with your connected account setup.</p></div><button className="danger"><Trash2 size={16}/>Delete local data</button></article></section>; }
+function MoreRoom({ theme, setTheme, locale, setLocale, sound, setSound, companion, setCompanion, byokKey, setByokKey }: { theme: Theme; setTheme: (theme: Theme) => void; locale: Locale; setLocale: (locale: Locale) => void; sound: boolean; setSound: (value: boolean) => void; companion: boolean; setCompanion: (value: boolean) => void; byokKey: string; setByokKey: (value: string) => void }) { return <section className="page-flow settings-room"><div className="page-heading"><div><p className="eyebrow">QUIET SETTINGS</p><h1>Make the kitchen feel like yours.</h1></div></div><article className="settings-card"><h2><Languages size={20}/>Language</h2><div className="option-grid">{(["EN", "RU", "BG"] as Locale[]).map((item) => <button className={locale === item ? "selected" : ""} onClick={() => setLocale(item)} key={item}>{item === "EN" ? "English" : item === "RU" ? "Русский" : "Български"}</button>)}</div></article><article className="settings-card"><h2><Sun size={20}/>Atmosphere</h2><div className="theme-grid">{(["daylight", "dark", "pantry"] as Theme[]).map((item) => <button className={`theme-choice ${item} ${theme === item ? "selected" : ""}`} onClick={() => setTheme(item)} key={item}><i/>{item === "daylight" ? "Daylight Kitchen" : item === "dark" ? "Dark After-Hours" : "Quiet Pantry"}</button>)}</div></article><article className="settings-card"><h2><Bot size={20}/>Bring your own AI key</h2><p>Optional: use your own DeepSeek key without a Quiet Pantry account or credits. It stays only in this browser and is sent only to Miro’s request endpoint.</p><label className="byok-input">DeepSeek API key<input type="password" value={byokKey} onChange={(event) => setByokKey(event.target.value)} placeholder="sk-…" autoComplete="off"/></label></article><article className="settings-card toggle-card"><div><h2><Volume2 size={20}/>Kitchen sounds</h2><p>Only after you interact. Never essential to the plan.</p></div><Toggle value={sound} onChange={setSound}/></article><article className="settings-card toggle-card"><div><h2>🐭 Miro, your pantry mouse</h2><p>Local companion; hosted AI is always a separate 31-credit action.</p></div><Toggle value={companion} onChange={setCompanion}/></article><article className="settings-card data-card"><div><h2>Local data</h2><p>Recipes, history, flyers and pantry remain in this browser. JSON export/import is coming with your connected account setup.</p></div><button className="danger"><Trash2 size={16}/>Delete local data</button></article></section>; }
 
 function Toggle({ value, onChange }: { value: boolean; onChange: (value: boolean) => void }) { return <button className={value ? "toggle on" : "toggle"} onClick={() => onChange(!value)} aria-pressed={value}><i/></button>; }
 
