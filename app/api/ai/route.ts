@@ -8,28 +8,38 @@ export async function POST(request: NextRequest) {
   if (!prompt?.trim()) return NextResponse.json({ error: "A kitchen question is required." }, { status: 400 });
 
   const auth = request.headers.get("authorization");
+  const byokKey = request.headers.get("x-quiet-pantry-byok")?.trim();
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
   // Local demo mode keeps the product usable before Supabase is connected.
-  if (!supabaseUrl || !anonKey || !serviceKey) {
+  if (!byokKey && (!supabaseUrl || !anonKey || !serviceKey)) {
     return NextResponse.json({ content: localKitchenReply(prompt), creditsRemaining: 310, demo: true });
   }
-  if (!auth) return NextResponse.json({ error: "Sign in with a magic link to use Miro AI." }, { status: 401 });
+  if (!byokKey && !auth) return NextResponse.json({ error: "Sign in with a magic link to use hosted Miro AI, or add your own API key in Settings." }, { status: 401 });
 
-  const userClient = createClient(supabaseUrl, anonKey, { global: { headers: { Authorization: auth } } });
-  const { data: { user } } = await userClient.auth.getUser();
-  if (!user) return NextResponse.json({ error: "Sign in with a magic link to use Miro AI." }, { status: 401 });
+  let creditsRemaining = 310;
+  let userId = "";
+  // RPC schemas are created by the supplied SQL at deploy time, so they are not
+  // present in the generated client types at source-build time.
+  let admin: any = null;
 
-  const admin = createClient(supabaseUrl, serviceKey);
-  const { data: debit, error: debitError } = await admin.rpc("consume_ai_credits", { p_user_id: user.id, p_amount: CREDIT_COST, p_action: action });
-  if (debitError || !debit?.[0]?.success) return NextResponse.json({ error: debit?.[0]?.message || "Not enough credits." }, { status: 402 });
+  if (!byokKey) {
+    const userClient = createClient(supabaseUrl!, anonKey!, { global: { headers: { Authorization: auth! } } });
+    const { data: { user } } = await userClient.auth.getUser();
+    if (!user) return NextResponse.json({ error: "Sign in with a magic link to use hosted Miro AI." }, { status: 401 });
+    userId = user.id;
+    admin = createClient(supabaseUrl!, serviceKey!);
+    const { data: debit, error: debitError } = await admin.rpc("consume_ai_credits", { p_user_id: user.id, p_amount: CREDIT_COST, p_action: action });
+    if (debitError || !debit?.[0]?.success) return NextResponse.json({ error: debit?.[0]?.message || "Not enough credits." }, { status: 402 });
+    creditsRemaining = debit[0].credits_remaining;
+  }
 
   try {
     const response = await fetch("https://api.deepseek.com/chat/completions", {
       method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${process.env.DEEPSEEK_API_KEY}` },
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${byokKey || process.env.DEEPSEEK_API_KEY}` },
       body: JSON.stringify({ model: process.env.DEEPSEEK_MODEL || "deepseek-v4-flash", temperature: 0.65, messages: [
         { role: "system", content: "You are Miro, a warm practical kitchen assistant. Give safe, concise, actionable cooking advice. Do not claim medical expertise. Use normal cooking measures such as potatoes, cans, bulbs and tablespoons; mention grams only when useful." },
         { role: "user", content: prompt },
@@ -37,9 +47,9 @@ export async function POST(request: NextRequest) {
     });
     if (!response.ok) throw new Error("The kitchen connection is unavailable.");
     const data = await response.json();
-    return NextResponse.json({ content: data.choices?.[0]?.message?.content || "Miro could not make a plan this time.", creditsRemaining: debit[0].credits_remaining });
+    return NextResponse.json({ content: data.choices?.[0]?.message?.content || "Miro could not make a plan this time.", creditsRemaining, byok: Boolean(byokKey) });
   } catch (error) {
-    await admin.rpc("refund_ai_credits", { p_user_id: user.id, p_amount: CREDIT_COST, p_action: `${action}:provider_error` });
+    if (admin && userId) await admin.rpc("refund_ai_credits", { p_user_id: userId, p_amount: CREDIT_COST, p_action: `${action}:provider_error` });
     return NextResponse.json({ error: error instanceof Error ? error.message : "AI request failed. Your credits were returned." }, { status: 502 });
   }
 }

@@ -6,21 +6,11 @@ Quiet Pantry is the clean TypeScript rebuild of **Cook Once, Live Free**: a loca
 
 Recipes, weekly plans, flyers, receipt images, deal history, pantry state, themes and sounds are browser-local. The app does not use Supabase Storage. The only hosted information is the signed-in account's entitlement and credit ledger.
 
-## Run locally
-
-```powershell
-npm install
-copy .env.example .env.local
-npm run dev
-```
-
-Without credentials, Miro runs in a clearly labelled local preview mode so the UI can be tested. Add the setup values below to turn on magic-link identity and hosted AI.
-
 ## Supabase setup
 
 1. Create a new Supabase project named `quiet-pantry` in the EU region.
 2. In **Authentication → Providers → Email**, enable Email and enable Magic Link. Disable password sign-in if you do not want passwords.
-3. In **Authentication → URL Configuration**, add `http://localhost:3000` and your Vercel domain to Redirect URLs.
+3. In **Authentication → URL Configuration**, set your Vercel production URL as the Site URL and add that same URL to Redirect URLs.
 4. Open **SQL Editor**, paste and run the complete file [`supabase/quiet-pantry.sql`](./supabase/quiet-pantry.sql).
 5. In **Project Settings → API**, copy the Project URL and anon key. In **Project Settings → API Keys**, copy the service-role key. The service-role key is server-only.
 
@@ -36,7 +26,7 @@ Set these in **Vercel → Project → Settings → Environment Variables** for P
 | `DEEPSEEK_API_KEY` | DeepSeek API key — server only |
 | `DEEPSEEK_MODEL` | `deepseek-v4-flash` |
 
-Copy the same values into `.env.local` for local work. Never commit `.env.local`.
+You only need to add these values in Vercel for deployment. Never expose or commit the two server-only keys.
 
 ## Credit policy
 
@@ -44,6 +34,8 @@ Copy the same values into `.env.local` for local work. Never commit `.env.local`
 - Pro plan: 3,100 credits monthly = 100 AI actions.
 - Every hosted Miro action consumes 31 credits, including a user-initiated messy flyer/receipt interpretation.
 - The API atomically debits first; if DeepSeek fails it refunds the 31 credits.
+- Anyone can explore the app without signing in. Magic-link identity is required only for the hosted credit allowance.
+- Users can alternatively add their own DeepSeek key in Settings. BYOK is stored only in that browser, bypasses Quiet Pantry credits, and is sent only for that user's Miro request.
 
 ## Current foundation
 
