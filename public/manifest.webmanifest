@@ -1,0 +1,10 @@
+{
+  "name": "Quiet Pantry",
+  "short_name": "Pantry",
+  "description": "Cook once, live free.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f6f1e7",
+  "theme_color": "#2d6656",
+  "icons": []
+}
