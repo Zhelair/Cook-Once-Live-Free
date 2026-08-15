@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { type CSSProperties, useEffect, useMemo, useRef, useState } from "react";
+import { type CSSProperties, type PointerEvent as ReactPointerEvent, useEffect, useMemo, useRef, useState } from "react";
 
 type Page = "home" | "plan" | "recipes" | "shop" | "more";
 type Avatar = "juniper" | "rowan";
@@ -22,9 +22,11 @@ export function DollhouseScene({ deals, go, onMiro }: { deals: string[]; go: (pa
   const [position, setPosition] = useState({ x: 48, y: 62 });
   const [facing, setFacing] = useState<Facing>("down");
   const [walking, setWalking] = useState(false);
+  const [stick, setStick] = useState({ x: 0, y: 0 });
   const [activeStation, setActiveStation] = useState<string | null>(null);
   const [pet, setPet] = useState<Pet | null>(null);
   const stopWalking = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const joystickHold = useRef<ReturnType<typeof setInterval> | null>(null);
   const nearby = useMemo(() => stations.map((station) => ({ station, distance: Math.hypot(position.x - station.x, position.y - station.y) })).filter(({ distance }) => distance < 12).sort((a, b) => a.distance - b.distance)[0]?.station, [position]);
 
   const move = (x: number, y: number) => {
@@ -50,6 +52,16 @@ export function DollhouseScene({ deals, go, onMiro }: { deals: string[]; go: (pa
     setPet(which);
     setActiveStation(null);
   };
+  const steer = (event: ReactPointerEvent<HTMLButtonElement>, repeat = false) => {
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const x = Math.max(-1, Math.min(1, (event.clientX - bounds.left - bounds.width / 2) / (bounds.width / 2)));
+    const y = Math.max(-1, Math.min(1, (event.clientY - bounds.top - bounds.height / 2) / (bounds.height / 2)));
+    setStick({ x: x * 18, y: y * 18 });
+    if (!repeat && Math.hypot(x, y) < .22) return;
+    move(Math.abs(x) > Math.abs(y) ? Math.sign(x) * 2.4 : 0, Math.abs(y) >= Math.abs(x) ? Math.sign(y) * 2.4 : 0);
+  };
+  const startJoystick = (event: ReactPointerEvent<HTMLButtonElement>) => { event.currentTarget.setPointerCapture(event.pointerId); steer(event); if (joystickHold.current) clearInterval(joystickHold.current); joystickHold.current = setInterval(() => steer(event, true), 120); };
+  const stopJoystick = () => { if (joystickHold.current) clearInterval(joystickHold.current); joystickHold.current = null; setStick({ x: 0, y: 0 }); };
 
   return <section className="dollhouse room-enter" aria-label="Quiet Pantry interactive kitchen">
     <Image className="dollhouse-art" src="/kitchen-dollhouse-v1.png" alt="A sunlit Quiet Pantry kitchen" fill priority sizes="(max-width: 700px) 100vw, 1120px" />
@@ -72,6 +84,7 @@ export function DollhouseScene({ deals, go, onMiro }: { deals: string[]; go: (pa
       <span>{pet === "miro" ? "I spotted a few things that could become dinner before they disappear into the back of the fridge." : "Give me one anchor meal. I’ll make the rest of the week feel much lighter."}</span>
       <div><button onClick={() => { setPet(null); onMiro(pet === "miro" ? "Help me turn what is already in my kitchen into a leftover rescue meal." : "Help me make a calm, simple plan for the next few meals."); }}>Ask {pet === "miro" ? "Miro" : "Scout"}</button><button onClick={() => { setPet(null); go(pet === "miro" ? "recipes" : "plan"); }}>{pet === "miro" ? "See recipes" : "Open plan"}</button></div>
     </aside>}
+    <button className="dollhouse-joystick" onPointerDown={startJoystick} onPointerMove={(event) => event.buttons && steer(event)} onPointerUp={stopJoystick} onPointerCancel={stopJoystick} onPointerLeave={stopJoystick} aria-label="Move your character"><span style={{ transform: `translate(${stick.x}px, ${stick.y}px)` }} /></button>
     <footer className="dollhouse-footer"><p>Walk with <kbd>W A S D</kbd> or <kbd>← ↑ ↓ →</kbd>. Touch a place to enter it.</p><span>{deals.length} market notes</span></footer>
   </section>;
 }
